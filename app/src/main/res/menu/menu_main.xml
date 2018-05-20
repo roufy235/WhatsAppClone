@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.roufy235.whatsappclone.Controllers.MainActivity">
+    <item
+        android:id="@+id/app_bar_search"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/action_group"
+        android:orderInCategory="100"
+        android:title="@string/new_group"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_broadcast"
+        android:orderInCategory="100"
+        android:title="@string/new_broadcast"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_web"
+        android:orderInCategory="100"
+        android:title="@string/whatsapp_web"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_starred"
+        android:orderInCategory="100"
+        android:title="@string/starred_messages"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>

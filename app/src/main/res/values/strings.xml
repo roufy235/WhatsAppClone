@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WhatsappClone</string>
+    <string name="tab_text_1">Chats</string>
+    <string name="tab_text_2">Status</string>
+    <string name="tab_text_3">Calls</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="search">Search</string>
+    <string name="new_group">New group</string>
+    <string name="new_broadcast">New broadcast</string>
+    <string name="whatsapp_web">WhatsApp web</string>
+    <string name="starred_messages">Starred messages</string>
+    <string name="view_contact">View contact</string>
+    <string name="media">Media</string>
+    <string name="mute_notification">Mute notification</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="phone">phone</string>
+    <string name="video">Video</string>
+</resources>

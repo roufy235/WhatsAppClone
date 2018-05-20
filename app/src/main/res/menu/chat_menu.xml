@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/video"
+        android:icon="@drawable/ic_videocam_black_24dp"
+        android:title="@string/video"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/phone"
+        android:icon="@drawable/ic_phone_in_talk_black_24dp"
+        android:title="@string/phone"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/view_contact"
+        android:title="@string/view_contact" />
+    <item
+        android:id="@+id/media"
+        android:title="@string/media" />
+    <item
+        android:id="@+id/mute"
+        android:title="@string/mute_notification" />
+    <item
+        android:id="@+id/wallpaper"
+        android:title="@string/wallpaper" />
+</menu>
