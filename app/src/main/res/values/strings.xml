@@ -16,4 +16,10 @@
     <string name="wallpaper">Wallpaper</string>
     <string name="phone">phone</string>
     <string name="video">Video</string>
+    <string name="privacy">Privacy</string>
+    <string name="security">Security</string>
+    <string name="two_step_verification">Two-step verification</string>
+    <string name="change_number">Change number</string>
+    <string name="delete_my_account">Delete my account</string>
+    <string name="type_a_message">Type a message</string>
 </resources>

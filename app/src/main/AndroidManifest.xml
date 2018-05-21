@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.roufy235.whatsappclone">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,8 +33,10 @@
         <activity
             android:name=".Controllers.SettingsActivity"
             android:theme="@style/noActionBar" />
-        <activity android:name=".Controllers.SettingsAccountActivity"
-            android:theme="@style/noActionBar"></activity>
+        <activity
+            android:name=".Controllers.SettingsAccountActivity"
+            android:theme="@style/noActionBar" />
+        <activity android:name=".Controllers.ReceiversProfileActivity"></activity>
     </application>
 
 </manifest>

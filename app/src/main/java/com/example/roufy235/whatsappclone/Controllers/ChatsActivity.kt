@@ -1,32 +1,68 @@
 package com.example.roufy235.whatsappclone.Controllers
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.roufy235.whatsappclone.Adapters.MessagesRecyclerAdapter
+import com.example.roufy235.whatsappclone.Model.FirebaseDatabaseChatModel
 import com.example.roufy235.whatsappclone.Model.MessagesModel
 import com.example.roufy235.whatsappclone.R
+import com.example.roufy235.whatsappclone.Services.Data
+import com.example.roufy235.whatsappclone.Utilities.SHARED_PREFERENCE_LOGIN
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chats.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import android.support.v7.widget.RecyclerView
+import spencerstudios.com.bungeelib.Bungee
+
 
 class ChatsActivity : AppCompatActivity() {
 
+    private lateinit var  mFirebaseAnalytics : FirebaseAnalytics
+    private lateinit var mRef : DatabaseReference
+    private lateinit var database : FirebaseDatabase
+
+    lateinit var prefs : SharedPreferences
+
+
     lateinit var toolbar : Toolbar
 
-    val messageList = ArrayList<MessagesModel>()
+
     var adapter : MessagesRecyclerAdapter? = null
+
+    lateinit var chatName : String
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chats)
 
+        prefs = getSharedPreferences(SHARED_PREFERENCE_LOGIN, Context.MODE_PRIVATE)
+        database = FirebaseDatabase.getInstance()
+        mRef = database.reference
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
 
         val bundle :  Bundle = intent.extras
 
         val name = bundle.getString("Name")
+
+        chatName = bundle.getString("chatName")
+
+
+
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -41,7 +77,11 @@ class ChatsActivity : AppCompatActivity() {
         }
 
         toolbar.setOnClickListener {
-            Toast.makeText(this, "ToolBar clicked", Toast.LENGTH_SHORT).show()
+
+            val receiversActivityLoad = Intent(this, ReceiversProfileActivity::class.java)
+
+            startActivity(receiversActivityLoad)
+            Bungee.fade(this)
         }
 
 
@@ -49,21 +89,90 @@ class ChatsActivity : AppCompatActivity() {
 
 
         dummyMessages()
-        adapter = MessagesRecyclerAdapter(this, messageList)
+        adapter = MessagesRecyclerAdapter(this, Data.messageList)
 
 
         recyclerViewMessages.adapter = adapter
 
         val layoutManager = LinearLayoutManager(this)
-
         recyclerViewMessages.layoutManager = layoutManager
 
 
 
     }
 
+    fun sendMessage(view : View) {
+        val df = SimpleDateFormat("dd/MM/YYYY HH:mm:ss")
+
+        val dateObj = Date()
+
+        val message = chatTxt.text.toString()
+        val date = df.format(dateObj)
+
+
+        mRef.child("ChatMessages").child(chatName).push().setValue(FirebaseDatabaseChatModel(message, date, Data.getPhoneNumber(this)))
+
+        //Data.messageList.add(MessagesModel(message, date, "right"))
+        //adapter!!.notifyDataSetChanged()
+
+        // Check if no view has focus:
+        val keyView = this.currentFocus
+        if (keyView != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        chatTxt.text.clear()
+    }
+
 
     fun dummyMessages() {
+
+        mRef.child("ChatMessages").child(chatName).addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0 : DatabaseError?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(p0 : DataSnapshot?) {
+                try {
+
+                    Data.messageList.clear()
+                    //val dataMessage = ArrayList<MessagesModel>()
+
+                    val value = p0!!.value as HashMap<String, Any>
+
+                    for (key in value.keys) {
+                        val uniqueId = value[key] as HashMap<String, Any>
+                        if (uniqueId["sender"].toString() == Data.getPhoneNumber(this@ChatsActivity)) {
+                            Data.messageList.add(MessagesModel(uniqueId["message"].toString(), uniqueId["date"].toString(), "right"))
+                        } else {
+                            Data.messageList.add(MessagesModel(uniqueId["message"].toString(), uniqueId["date"].toString(), "left"))
+                        }
+                    }
+
+
+                    Data.messageList.sortWith(compareBy({it.time}))
+
+                    //Data.messageList = Data.messageList.sortedWith(compareBy({ it.time }))
+
+
+                    //println(Data.messageList)
+
+                    adapter!!.notifyDataSetChanged()
+
+
+                    recyclerViewMessages.smoothScrollToPosition(Data.messageList.count())
+
+                } catch (ex : Exception) {
+                    println(ex.message)
+                }
+            }
+        })
+
+
+
+        /*
+
         messageList.add(MessagesModel("Wakanda Forever", "10:11 AM", "right"))
         messageList.add(MessagesModel("you don watch am", "10:11 AM", "left"))
         messageList.add(MessagesModel("yas nah", "10:11 AM", "right"))
@@ -80,6 +189,7 @@ class ChatsActivity : AppCompatActivity() {
         messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
         messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
         messageList.add(MessagesModel("hex color red value is 25, green value is 153 and the blue value of its RGB is 153. ", "10:11 AM", "right"))
+         */
     }
 
     override fun onCreateOptionsMenu(menu : Menu?) : Boolean {
