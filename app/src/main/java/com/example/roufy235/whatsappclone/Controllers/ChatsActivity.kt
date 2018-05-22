@@ -79,6 +79,7 @@ class ChatsActivity : AppCompatActivity() {
         toolbar.setOnClickListener {
 
             val receiversActivityLoad = Intent(this, ReceiversProfileActivity::class.java)
+            receiversActivityLoad.putExtra("Name", name)
 
             startActivity(receiversActivityLoad)
             Bungee.fade(this)

@@ -20,12 +20,15 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/settingsActivityUserImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="loadProfile"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/download" />
@@ -61,7 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ripple"
+            android:clickable="true"
             android:onClick="accountClicked"
+            android:focusable="true"
             android:orientation="horizontal"
             android:padding="25dp">
 

@@ -36,7 +36,11 @@
         <activity
             android:name=".Controllers.SettingsAccountActivity"
             android:theme="@style/noActionBar" />
-        <activity android:name=".Controllers.ReceiversProfileActivity"></activity>
+        <activity
+            android:name=".Controllers.ReceiversProfileActivity"
+            android:theme="@style/noActionBar" />
+        <activity android:name=".Controllers.ChangeProfileActivity"
+            android:theme="@style/noActionBar"></activity>
     </application>
 
 </manifest>

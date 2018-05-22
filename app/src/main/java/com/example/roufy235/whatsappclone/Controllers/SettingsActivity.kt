@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.roufy235.whatsappclone.R
 import kotlinx.android.synthetic.main.activity_settings.*
+import spencerstudios.com.bungeelib.Bungee
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -33,6 +34,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
 
+    fun loadProfile(view : View) {
+        val intent = Intent(this, ChangeProfileActivity::class.java)
+        startActivity(intent)
+        Bungee.fade(this)
+    }
 
     fun accountClicked(view : View) {
         val accountLoad = Intent(this, SettingsAccountActivity::class.java)

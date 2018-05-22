@@ -22,4 +22,5 @@
     <string name="change_number">Change number</string>
     <string name="delete_my_account">Delete my account</string>
     <string name="type_a_message">Type a message</string>
+    <string name="this_is_not_your_username_or_pin_this_name_will_be_visible_to_your_whatsappclone_contacts">This is not your username or pin. This name will be visible to your WhatsAppClone contacts.</string>
 </resources>
