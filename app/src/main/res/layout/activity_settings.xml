@@ -81,9 +81,9 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Account"
+                android:text="@string/account"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -113,9 +113,9 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Chats"
+                android:text="@string/chats"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -144,9 +144,9 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Notifications"
+                android:text="@string/notifications"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -175,9 +175,9 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Data and storage usage"
+                android:text="@string/data_and_storage_usage"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -206,9 +206,9 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Invite a friend"
+                android:text="@string/invite_a_friend"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -237,9 +237,9 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:text="Help"
+                android:text="@string/help"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

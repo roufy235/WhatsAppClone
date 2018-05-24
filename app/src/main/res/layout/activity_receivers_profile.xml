@@ -139,7 +139,7 @@
                             android:id="@+id/textView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mute Notifications"
+                            android:text="@string/mute_notifications"
                             android:textSize="16sp" />
 
                         <Switch
@@ -162,7 +162,7 @@
                         android:layout_marginTop="20dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="Custom Notifications"
+                        android:text="@string/custom_notifications"
                         android:textSize="16sp" />
 
                     <View
@@ -189,14 +189,14 @@
                                 android:id="@+id/textView14"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Encryption"
+                                android:text="@string/encryption"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/textView15"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Messages to this chat and calls are secured with end-to-end encryption"
+                                android:text="@string/messages_to_this_chat_and_calls_are_secured_with_end_to_end_encryption"
                                 android:textColor="@color/gray"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -249,7 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Block"
+                        android:text="@string/block"
                         android:textColor="#FF0000"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -286,7 +286,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Report spam"
+                        android:text="@string/report_spam"
                         android:textColor="#FF0000"
                         android:textSize="18sp" />
                 </LinearLayout>
