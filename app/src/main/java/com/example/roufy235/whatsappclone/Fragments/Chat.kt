@@ -102,7 +102,7 @@ class Chat : Fragment() {
                         Data.chatsArray.add(ChatsModel(uniqueId["name"].toString(), "user_image", "07033224455: hello", "10:30 AM", "10", uniqueId["number"].toString()))
                     }
 
-                    println(Data.chatsArray)
+                    //println(Data.chatsArray)
 
                     adapter!!.notifyDataSetChanged()
 

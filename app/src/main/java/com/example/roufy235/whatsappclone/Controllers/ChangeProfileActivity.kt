@@ -7,9 +7,11 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.view.View
+import android.widget.Toast
 import com.example.roufy235.whatsappclone.R
 import kotlinx.android.synthetic.main.activity_change_profile.*
 import spencerstudios.com.bungeelib.Bungee
@@ -34,9 +36,7 @@ class ChangeProfileActivity : AppCompatActivity() {
             finish()
             Bungee.fade(this)
         }
-
         roundedImage()
-
     }
 
 
@@ -45,6 +45,8 @@ class ChangeProfileActivity : AppCompatActivity() {
     }
 
     private fun checkPermissionNow() {
+
+
         if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 12)
@@ -60,6 +62,8 @@ class ChangeProfileActivity : AppCompatActivity() {
             12 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     loadImageNow()
+                } else {
+                    Toast.makeText(this, "Unable to access your gallery", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -67,8 +71,36 @@ class ChangeProfileActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode : Int, resultCode : Int, data : Intent?) {
         if (requestCode == 23 && data != null && resultCode == Activity.RESULT_OK) {
+            val selectedImage = data.data
 
+            val path = arrayOf(MediaStore.Images.Media.DATA)
+
+            val cursor = contentResolver.query(selectedImage, path, null,  null ,null)
+            cursor.moveToFirst()
+
+            val imagePath = cursor.getString(cursor.getColumnIndex(path[0]))
+
+            val bitmap = BitmapFactory.decodeFile(imagePath)
+
+            val rounded = RoundedBitmapDrawableFactory.create(resources, bitmap)
+
+            rounded.isCircular = true
+
+            changeProfileImageIV.setImageDrawable(rounded)
+
+            cursor.close()
+
+            uploadToFireBaseFireStorage()
         }
+    }
+
+
+    private fun uploadToFireBaseFireStorage() {
+        uploadImageSpinner.visibility = View.VISIBLE
+        changeProfileNow.isEnabled = false
+
+        //Todo: profile image upload to firebase storage
+
     }
 
     private fun loadImageNow() {

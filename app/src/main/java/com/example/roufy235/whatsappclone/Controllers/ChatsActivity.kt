@@ -111,7 +111,7 @@ class ChatsActivity : AppCompatActivity() {
         val date = df.format(dateObj)
 
 
-        mRef.child("ChatMessages").child(chatName).push().setValue(FirebaseDatabaseChatModel(message, date, Data.getPhoneNumber(this)))
+        mRef.child("ChatMessages").child(chatName).push().setValue(FirebaseDatabaseChatModel(message, date, Data.getPhoneNumber(this), 0))
 
         //Data.messageList.add(MessagesModel(message, date, "right"))
         //adapter!!.notifyDataSetChanged()
@@ -145,8 +145,12 @@ class ChatsActivity : AppCompatActivity() {
                     for (key in value.keys) {
                         val uniqueId = value[key] as HashMap<String, Any>
                         if (uniqueId["sender"].toString() == Data.getPhoneNumber(this@ChatsActivity)) {
+                            //println(value[key])
                             Data.messageList.add(MessagesModel(uniqueId["message"].toString(), uniqueId["date"].toString(), "right"))
                         } else {
+
+                            //println(value[key])
+                            //mRef.child("ChatMessages").child(chatName).child().child("read").setValue(1)
                             Data.messageList.add(MessagesModel(uniqueId["message"].toString(), uniqueId["date"].toString(), "left"))
                         }
                     }
@@ -161,36 +165,13 @@ class ChatsActivity : AppCompatActivity() {
 
                     adapter!!.notifyDataSetChanged()
 
-
                     recyclerViewMessages.smoothScrollToPosition(Data.messageList.count())
 
                 } catch (ex : Exception) {
-                    println(ex.message)
+                    //println(ex.message)
                 }
             }
         })
-
-
-
-        /*
-
-        messageList.add(MessagesModel("Wakanda Forever", "10:11 AM", "right"))
-        messageList.add(MessagesModel("you don watch am", "10:11 AM", "left"))
-        messageList.add(MessagesModel("yas nah", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "left"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("no wahala", "10:11 AM", "right"))
-        messageList.add(MessagesModel("hex color red value is 25, green value is 153 and the blue value of its RGB is 153. ", "10:11 AM", "right"))
-         */
     }
 
     override fun onCreateOptionsMenu(menu : Menu?) : Boolean {
