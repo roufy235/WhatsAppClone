@@ -130,11 +130,11 @@ class ChatsActivity : AppCompatActivity() {
     fun dummyMessages() {
 
         mRef.child("ChatMessages").child(chatName).addValueEventListener(object : ValueEventListener{
-            override fun onCancelled(p0 : DatabaseError?) {
+            override fun onCancelled(p0 : DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onDataChange(p0 : DataSnapshot?) {
+            override fun onDataChange(p0 : DataSnapshot) {
                 try {
 
                     Data.messageList.clear()

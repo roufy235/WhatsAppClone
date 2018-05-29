@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WhatsappClone</string>
+    <string name="app_name">WhatsAppClone</string>
     <string name="tab_text_1">Chats</string>
     <string name="tab_text_2">Status</string>
     <string name="tab_text_3">Calls</string>

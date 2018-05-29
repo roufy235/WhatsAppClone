@@ -126,11 +126,11 @@ class MainActivity : AppCompatActivity() {
                     //println(phoneNumber)
                     //check if user has already registered
                     mRef.child("contacts").orderByChild("PhoneNumber").equalTo(phoneNumber).addValueEventListener(object : ValueEventListener{
-                        override fun onCancelled(p0 : DatabaseError?) {
+                        override fun onCancelled(p0 : DatabaseError) {
                             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                         }
 
-                        override fun onDataChange(p0 : DataSnapshot?) {
+                        override fun onDataChange(p0 : DataSnapshot) {
                             if (p0 != null) {
                                 if (p0.exists()) {
                                     //save

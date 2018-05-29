@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.roufy235.whatsappclone.Model.ChatsModel
 import com.example.roufy235.whatsappclone.R
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 class ChatRecyclerAdapter(val context : Context, val chats : ArrayList<ChatsModel>, val itemClicked : (ChatsModel) -> Unit) : RecyclerView.Adapter<ChatRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent : ViewGroup?, viewType : Int) : ViewHolder {
@@ -50,7 +52,13 @@ class ChatRecyclerAdapter(val context : Context, val chats : ArrayList<ChatsMode
 
 
 
-            image.setImageDrawable(rounded)
+            //image.setImageDrawable(rounded)
+
+            image.setImageResource(R.drawable.ic_person_black_24dp)
+
+
+
+
 
             name.text = chats.name
             messages.text = chats.message

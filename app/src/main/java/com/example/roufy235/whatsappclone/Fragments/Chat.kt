@@ -85,13 +85,13 @@ class Chat : Fragment() {
         Data.chatsArray.clear()
 
         mRef.child("userChatList").child(Data.getPhoneNumber(context)).addValueEventListener(object : ValueEventListener{
-            override fun onCancelled(p0 : DatabaseError?) {
+            override fun onCancelled(p0 : DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onDataChange(p0 : DataSnapshot?) {
+            override fun onDataChange(p0 : DataSnapshot) {
                 try {
-                    val value = p0!!.value as HashMap<String, Any>
+                    val value = p0.value as HashMap<String, Any>
 
                     Data.chatsArray.clear()
 
@@ -107,7 +107,7 @@ class Chat : Fragment() {
                     adapter!!.notifyDataSetChanged()
 
                 } catch (ex : Exception) {
-                    println(ex.message)
+                   // println(ex.message)
                 }
             }
 

@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileToolbar"
-        app:srcCompat="@drawable/user_image" />
+        app:srcCompat="@drawable/ic_person_black_24dp" />
 
     <ImageButton
         android:id="@+id/changeProfileNow"

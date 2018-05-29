@@ -1,23 +1,33 @@
 package com.example.roufy235.whatsappclone.Controllers
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.roufy235.whatsappclone.R
+import com.example.roufy235.whatsappclone.Services.Data
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.activity_settings.*
 import spencerstudios.com.bungeelib.Bungee
 
 class SettingsActivity : AppCompatActivity() {
 
     lateinit var toolbar : Toolbar
+    private lateinit var  mFirebaseAnalytics : FirebaseAnalytics
+    private lateinit var mRef : DatabaseReference
+    private lateinit var database : FirebaseDatabase
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        database = FirebaseDatabase.getInstance()
+        mRef = database.reference
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
 
         roundedImage()
@@ -47,13 +57,26 @@ class SettingsActivity : AppCompatActivity() {
 
 
     fun roundedImage() {
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.user_image)
+        mRef.child("contacts").child("profileImage").child(Data.getPhoneNumber(this)).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0 : DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
-        val rounded = RoundedBitmapDrawableFactory.create(resources, bitmap)
+            override fun onDataChange(p0 : DataSnapshot) {
+                if (p0.value != null) {
+                    val  path = p0.value as String
 
-        rounded.isCircular = true
+                    Picasso
+                            .get()
+                            .load(path)
+                            .transform(CropCircleTransformation())
+                            .placeholder(R.drawable.ic_person_black_24dp)
+                            .into(settingsActivityUserImage)
+                } else {
+                    settingsActivityUserImage.setImageResource(R.drawable.ic_person_black_24dp)
+                }
 
-        settingsActivityUserImage.setImageDrawable(rounded)
+            }
+        })
     }
-
 }
